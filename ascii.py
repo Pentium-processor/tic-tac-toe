@@ -95,30 +95,30 @@ else:
                     player_1_turn=f'It is now {player_1_name}"s turn'
                     print(f'{player_1_turn}')
                     time.sleep(1)
-                    position=int(input('Enter a number between 0 and 8: '))
-                    if position>8 or position<0:
+                    position=int(input('Enter a number between 1 and 9: '))
+                    if position>9 or position<1:
                         error_msg('Error, invalid index, pls restart the game')
-                    elif position==3 or position==6:
-                        del game_board[position] 
-                        game_board.insert(position,f'\n{symbol}')
+                    elif position==7:
+                        del game_board[position-1] 
+                        game_board.insert(position-1,f'\n{symbol}')
                         print(f'{" ".join(game_board)}')
                     else:
-                        del game_board[position]
-                        game_board.insert(position,symbol)
+                        del game_board[position-1]
+                        game_board.insert(position-1,symbol)
                         print(f'{" ".join(game_board)}')
                 elif player_2:
                     print(f'It"s now {player_2_name}"s turn')
                     time.sleep(1)
-                    position=int(input('Enter a number between 0 and 8:'))
-                    if position>8 or position<0:
+                    position=int(input('Enter a number between 1 and 9:'))
+                    if position>9 or position<1:
                         error_msg('Error, invalid index, pls restart the game')
-                    elif position==3 or position==6:
-                        del game_board[position]
-                        game_board.insert(position,f'\n{opponent_symbol}')
+                    elif position==7:
+                        del game_board[position-1] 
+                        game_board.insert(position-1,f'\n{opponent_symbol}')
                         print(f'{" ".join(game_board)}')
                     else:
-                        del game_board[position]
-                        game_board.insert(position,f'{opponent_symbol}')
+                        del game_board[position-1]
+                        game_board.insert(position-1,f'{opponent_symbol}')
                         print(f'{" ".join(game_board)}')
                         
             choose_position(player_1=player_1_name,player_2=player_2_name)
