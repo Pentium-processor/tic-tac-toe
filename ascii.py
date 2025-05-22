@@ -1,28 +1,78 @@
 import time 
 from colorama import Fore 
 import sys 
-import random
+import os
 title='tic tac toe'
 x='x'.upper()
 o='o'.upper()
-colors=(Fore.RED,Fore.GREEN,Fore.BLUE,Fore.YELLOW)
+frames=[f'''
+         {Fore.RED}██                        {Fore.BLUE}██{Fore.RESET}
+         
+         
+         
+         
+
+████████╗  ╗ ██████╗    ████████╗██   ██╗  ██████╗   ████████╗ ██████╗ ███████╗
+╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝
+   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  
+   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  
+   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗
+   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝''',
+         
+     f'''               
+         
+         {Fore.RED}██                        {Fore.BLUE}██{Fore.RESET}    
+         
+         
+████████╗  ╗ ██████╗    ████████╗██   ██╗ ██████╗    ████████╗ ██████╗ ███████╗
+╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝
+   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  
+   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  
+   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗
+   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝
+         
+                                   ''',f'''
+         
+         
+         {Fore.RED}██                        {Fore.BLUE}██{Fore.RESET} 
+████████╗  ╗ ██████╗    ████████╗██   ██╗ ██████╗    ████████╗ ██████╗ ███████╗
+╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝
+   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  
+   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  
+   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗
+   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝
+         
+         
+         
+                                 ''',f'''
+         
+         
+████████╗{Fore.RED}██╗{Fore.RESET} ██████╗    ███{Fore.BLUE}██{Fore.RESET}███╗██████╗ ██████╗     ████████╗ ██████╗ ███████╗
+╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝
+   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  
+   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  
+   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗
+   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝
+         
+        ''']
 def error_msg(txt=''):
     for text in txt:
         sys.stderr.flush()
         time.sleep(0.1)
-        sys.stderr.write(f'{colors[0]}{text}')
+        sys.stderr.write(f'{Fore.RED}{text}')
     else:
         global reset_to_default_color 
         reset_to_default_color=Fore.RESET 
         print(f'{reset_to_default_color}')
-        
-error_msg()
-for txt in title:
+for txt in frames:
     sys.stdout.flush()
-    time.sleep(0.1)
-    sys.stdout.write(f'\t{random.choice(colors)}{txt.upper()}')
+    time.sleep(1)
+    os.system("cls")
+    sys.stdout.write(txt)
 else:
-    print(f'{reset_to_default_color}')
+    time.sleep(1)
+    os.system("cls")
+    print(f'{Fore.WHITE}')
     time.sleep(0.2)
     print('Creating the board....\n')
     time.sleep(0.2)
@@ -71,8 +121,8 @@ else:
             sys.exit(f'{player_1_won_msg}')
         elif game_board[2]==player_2_symbol and game_board[4]==player_2_symbol and game_board[6]==f'\n{player_2_symbol}':
             sys.exit(f'{player_2_won_msg}')
-        else:
-            print(f'{tie_msg}')
+        elif '-' not in game_board:
+            sys.exit("DRAW")
     try:
         player_1_name=input('Player 1 name:')
         time.sleep(1)
@@ -98,7 +148,11 @@ else:
                     position=int(input('Enter a number between 1 and 9: '))
                     if position>9 or position<1:
                         error_msg('Error, invalid index, pls restart the game')
-                    elif position==7:
+                    elif position==1 and game_board[0]==opponent_symbol or position==2 and game_board[1]==opponent_symbol or position==3 and game_board[2]==opponent_symbol or position==4 and game_board[3]==f"\n{opponent_symbol}" or position==5 and game_board[4]==opponent_symbol or position==6 and game_board[5]==opponent_symbol or position==7 and game_board[6]==f"\n{opponent_symbol}" or position==8 and game_board[7]==opponent_symbol or position==9 and game_board[8]==opponent_symbol:
+                          quit("cannot perform action due to the desired space being occupied by player 2's symbol.")    
+                    elif position==1 and game_board[0]==symbol or position==2 and game_board[1]==symbol or position==3 and game_board[2]==symbol or position==4 and game_board[3]==f"\n{symbol}" or position==5 and game_board[4]==symbol or position==6 and game_board[5]==symbol or position==7 and game_board[6]==f"\n{symbol}" or position==8 and game_board[7]==symbol or position==9 and game_board[8]==symbol:
+                          quit("space is already taken by your symbol player 1.")
+                    elif position==7 or position==4:
                         del game_board[position-1] 
                         game_board.insert(position-1,f'\n{symbol}')
                         print(f'{" ".join(game_board)}')
@@ -112,7 +166,11 @@ else:
                     position=int(input('Enter a number between 1 and 9:'))
                     if position>9 or position<1:
                         error_msg('Error, invalid index, pls restart the game')
-                    elif position==7:
+                    elif position==1 and game_board[0]==symbol or position==2 and game_board[1]==symbol or position==3 and game_board[2]==symbol or position==4 and game_board[3]==f"\n{symbol}" or position==5 and game_board[4]==symbol or position==6 and game_board[5]==symbol or position==7 and game_board[6]==f"\n{symbol}" or position==8 and game_board[7]==symbol or position==9 and game_board[8]==symbol:
+                          quit("cannot perform action due to the desired space being occupied by player 1's symbol")
+                    elif position==1 and game_board[0]==opponent_symbol or position==2 and game_board[1]==opponent_symbol or position==3 and game_board[2]==opponent_symbol or position==4 and game_board[3]==f"\n{opponent_symbol}" or position==5 and game_board[4]==opponent_symbol or position==6 and game_board[5]==opponent_symbol or position==7 and game_board[6]==f"\n{opponent_symbol}" or position==8 and game_board[7]==opponent_symbol or position==9 and game_board[8]==opponent_symbol:
+                          quit("space is already taken by your symbol player 1.")          
+                    elif position==7 or position==4:
                         del game_board[position-1] 
                         game_board.insert(position-1,f'\n{opponent_symbol}')
                         print(f'{" ".join(game_board)}')
@@ -126,15 +184,16 @@ else:
                 choose_position(player_1=None,player_2=player_2_name)
                 choose_position(player_1=player_1_name,player_2=None)
                 choose_position(player_1=None,player_2=player_2_name)
-                choose_position(player_1=player_1_name,player_2=None)
-                win_condition(player_1_symbol=symbol,player_2_symbol=opponent_symbol)
-                choose_position(player_1=None,player_2=player_2_name)
                 win_condition(player_1_symbol=symbol,player_2_symbol=opponent_symbol)
                 choose_position(player_1=player_1_name,player_2=None)
                 choose_position(player_1=None,player_2=player_2_name)
+                choose_position(player_1=player_1_name,player_2=None)
+                win_condition(player_1_symbol=symbol,player_2_symbol=opponent_symbol)
+                choose_position(player_1=None,player_2=player_2_name)
+                choose_position(player_1=player_1_name,player_2=None)
+                choose_position(player_1=None,player_2=player_2_name)
+                win_condition(player_1_symbol=symbol,player_2_symbol=opponent_symbol)
         else:
             error_msg(txt='Error, invalid symbol, pls restart the game')
     except ValueError:
-        pass
-    except IndexError:
         pass
